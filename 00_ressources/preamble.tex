@@ -1,0 +1,254 @@
+%------------------------------------------------------------------------------
+%Description:  LaTeX Thesis Template preamble
+%Author:       silas.kalmbach@ilek.uni-stuttgart.de
+%Created:      2021-03-10
+%------------------------------------------------------------------------------
+
+% ============= Randabstände =============
+
+\usepackage[left= 2.5cm, right = 2cm, top=2.5cm]{geometry}
+
+
+% ============= Farbschema =============
+
+\usepackage{color}      %Verwendung von Farben
+\usepackage{xcolor}		%Definition eigener Farben
+
+% Uni Stuttgart Colors
+\definecolor{uniSlightblue}{RGB}{0,190,255}
+\definecolor{uniSdarkblue}{RGB}{0,65,145}
+\definecolor{uniSdarkgrey}{RGB}{62, 68, 76}
+\definecolor{uniSgreyblue}{RGB}{125,198,234}
+\definecolor{uniSgrey}{RGB}{159,153,152}
+
+% Uni Stuttgart monochrom greyscale
+\definecolor{uniSblack}{RGB}{0,0,0}
+\definecolor{uniSdarkgrey}{RGB}{62,68,76}
+\definecolor{uniSgrey}{RGB}{159,153,152}
+\definecolor{uniSlightgrey}{RGB}{185,186,187}
+
+
+% ============= Standart Packages und Einstellungen =============
+
+\usepackage{ifluatex}
+\ifluatex
+	\usepackage[utf8]{luainputenc} %Schriftkodierung LuaLaTeX
+\else
+	\usepackage[utf8]{inputenc} %Schriftkodierung PDFLaTeX
+\fi
+
+\usepackage[hidelinks]{hyperref}
+\usepackage[english, ngerman]{babel} %Sprachen
+\usepackage{graphicx} %Einbinden von Bildern
+\usepackage{amsfonts} % zusätzliche Schriftzeichen der American Mathematical Society
+\usepackage{amsmath,amssymb} % zusätzliche Schriftzeichen der American Mathematical Society
+\usepackage{typearea} %Aufteilung von Rändern und Textbereich
+\usepackage{nicefrac}% weitere Alternative mit mehreren Zeichen für Brüche
+\usepackage{pdfpages} %Einfügen von PDFs
+\usepackage{appendix} %Anhang
+\usepackage{fvextra} %automatic line breaking and improved math mode
+\usepackage{csquotes} %inline and display quotations
+\usepackage[german, nameinlink]{cleveref} % Mehr Möglichkeiten zum referenzieren
+\usepackage{gensymb} %Symbole: \degree \celsius \perthousand \ohm \micro
+\tolerance = 400  % möglicher Abstand zwischen den Wörtern erhöhen
+\usepackage[section]{placeins} %\FloatBarrier Verhindert das Abbildungen in nachfolgenden Kapitel rutschen
+\makeatletter\AtBeginDocument{\expandafter\renewcommand\expandafter\subsection\expandafter{\expandafter\@fb@secFB\subsection}}\makeatother %FloatBarrier für Subsection
+\usepackage{subcaption} % Bilder nebeneinander
+\captionsetup[subfigure]{list=true, labelfont=bf, position=top}
+\usepackage{wrapfig} % Bilder von Text umgeben
+
+
+% ============= Programmierung (Visualisierung) =============
+
+\if 1\mintedinstall
+	\usepackage[cache=false]{minted} %Highlighting von Code, Benötigt Python und Pygments hinterlegt in den Umgebungsvariablen (pip install Pygments) ,cmd Eingabe->pdflatex -synctex=1 -interaction=nonstopmode -shell-escape %.tex
+	\usemintedstyle{tango, xleftmargin=20pt, linenos, fontsize=\small, breaklines=true, tabsize=4} %borland, bw, tango, frame=leftline
+\fi
+
+
+\usepackage{listings}
+%\lstset{
+%	language=python,
+%	otherkeywords={1, 2, 3, 4, 5, 6, 7, 8 ,9 , 0, -, =, +, [, ], (, ), \{, \}, :, *, !},
+%}
+
+\lstdefinestyle{UniStStyle}{
+%	backgroundcolor=\color{uniSlightgrey},   
+	commentstyle=\itshape\color{uniSlightblue}\lstset{columns=fullflexible},
+	keywordstyle=\color{uniSdarkblue},
+	numberstyle=\tiny\color{uniSlightgrey},
+	stringstyle=\color{uniSgreyblue},
+	basicstyle=\ttfamily\small,
+	xleftmargin=20pt,
+%	xrightmargin=3pt,
+	breakatwhitespace=false,         
+	breaklines=true,                 
+	captionpos=b,                    
+	keepspaces=true,                 
+	numbers=left,                    
+	numbersep=10pt,                  
+	showspaces=false,                
+	showstringspaces=false,
+	showtabs=false,                  
+	tabsize=4
+}
+
+\lstset{style=UniStStyle}
+
+
+% ============= Tabelleneinstellungen =============
+
+\usepackage{multirow}						% ermoeglicht mehrere Zeilen in einer Tabellenzeile
+\usepackage{multicol} 						% mehre Spalten auf eine Seite
+\usepackage{longtable}[=v4.13]				% alternatives Tabellenpackage inkl. longtabu und Farben
+\usepackage{tabu}
+\usepackage{float}							% um [H] bei float Objekten verwenden zu können
+\usepackage{booktabs}						% um \toprule, \midrule und \bottomrule verwenden zu können
+\usepackage{tabularx}
+\usepackage{tabulary}
+\usepackage{csvsimple} %Excel Improtieren als CSV 
+\usepackage{siunitx} %Wissenschaftliche Angabe der Einheiten \num{number}
+%für Excel to Latex Add-on
+\usepackage{colortbl} %Farbige Tabellen
+\usepackage{rotating} %Rotieren von Tabellen
+\usepackage{bigstrut} %Für Tabellen mit Vertikalen Linien
+
+
+% ============= Standart Einstellungen der Pfade =============
+
+\graphicspath{{./01_images/}{./01_images/Titelseite/}} %Bilderordner
+
+
+% ============= Schriftarten =============
+
+\ifluatex
+%% ============= Lua-LaTeX =============
+
+	\usepackage[no-math]{fontspec} 
+	\setmainfont{UniversforUniS}[
+	Extension      = .ttf,
+	Path           = 00_ressources/fonts/,
+	UprightFont    = *55Rm-Regular,
+	ItalicFont     = *45LtObl-Rg,
+	BoldFont       = *65Bd-Regular,
+	BoldItalicFont = *45LtObl-Rg,
+	]
+	\setsansfont{UniversforUniS}[
+	Extension      = .ttf,
+	Path           = 00_ressources/fonts/,
+	UprightFont    = *55Rm-Regular,
+	ItalicFont     = *45LtObl-Rg,
+	BoldFont       = *65Bd-Regular,
+	BoldItalicFont = *45LtObl-Rg,
+	]
+	%\setmonofont{}[]
+	\addtokomafont{disposition}{\rmfamily} %Überschriften selbe Schriftart wie Text
+	\renewcommand\familydefault\sfdefault % Formeln in Sans-Serif
+	\usepackage[italic, symbolgreek]{mathastext} % Formeln in Sans-Serif
+	\renewcommand\familydefault\rmdefault % Formeln in Sans-Serif
+
+\else
+%% ============= PDF-LaTeX =============
+	\usepackage[T1]{fontenc} %Richtige Trennung von Umlauten
+	\usepackage[scale=1]{tgheros}
+%	\usepackage{fourier}
+	\renewcommand\familydefault\sfdefault % alles in Sans-Serif
+	\usepackage[italic, symbolgreek]{mathastext} % Formeln in Sans-Serif
+\fi
+
+
+
+\usepackage{setspace} %Zeilenabstand
+\setstretch{1.05} %Zeilenabstand
+
+\setlength{\parindent}{0pt} %Wenn Absatzabstand, dann Einzug unnötig
+\setlength{\parskip}{7pt} %Absatzabstand
+
+
+
+% ============= Kopf- und Fußzeile =============
+
+\usepackage[automark, headsepline, autooneside=false]{scrlayer-scrpage}
+\automark[section]{chapter}	%Automatische Kapitelangabe in Kopfzeile
+\renewcommand*{\chaptermarkformat}{} %Kapitel ohne Kapitelnummer
+\renewcommand*{\sectionmarkformat}{} %Kapitel ohne Kapitelnummer
+\clearpairofpagestyles %aktuelle Einetsllungen aus Kopf- und Fußzeile löschen
+\setkomafont{pageheadfoot}{\small}		%Font für Kopfzeile
+\setkomafont{pagefoot}{\small}  		%Font für Fußzeile
+\setkomafont{pagenumber}{\small} 	%Font für Seitennummer
+\KOMAoptions{headsepline = true} %Kopzeile Linie
+
+\lehead[]{\rightmark} %Zweiseitig
+\cohead[]{}
+\rohead[]{\leftmark\enskip \raisebox{0.7pt}{|}\enskip \thechapter} %Darstellung Kapitel
+
+\lefoot[\pagemark]{\pagemark}
+\lofoot[]{}
+\cofoot[]{}
+\rofoot[\pagemark]{\pagemark} %Seitenzahl
+
+
+% ============= Literatur =============
+
+\usepackage[									
+natbib=true,									% Naturwissenschaftlich
+backend=biber,									% Biber statt BibTex verwenden. In TexStudio einstellen!
+style=numeric,									% Stil im Verzeichnis alt. authoryear
+citestyle=numeric,	                            % Stil im Fließtext
+giveninits=true,										
+doi=false,										% doi nicht mit angeben
+isbn=false,										% isbn nicht mit angeben
+sorting=none,									% Sortierung des Verzeichnis nach Autor, Titel, Jahr
+% sorting=none,									% Keine Sortierung des Verzeichnisses
+]{biblatex}	
+
+\addbibresource{Literatur.bib} %Bibliographiedateien laden
+
+\urlstyle{same}	% url Schriftart anpassen auf die des Dokuments anpassen
+\usepackage{xpatch}% author in bold font in bibliography
+\xpretobibmacro{author}{\mkbibbold\bgroup}{}{}
+\xapptobibmacro{author}{\egroup}{}{}
+\xpretobibmacro{bbx:shortauthor}{\mkbibbold\bgroup}{}{}
+\xapptobibmacro{bbx:shortauthor}{\egroup}{}{}
+\xpretobibmacro{bbx:editor}{\mkbibbold\bgroup}{}{}
+\xapptobibmacro{bbx:editor}{\egroup}{}{}
+
+
+% ============= Besondere Abkürzungen ============= 
+
+\usepackage[figurename=Abb., % Beschriftung von Abbildung zu Abb.
+tablename=Tab., % Beschriftung von Tabelle zu Tab.
+labelfont=bf]{caption} %Label in Bold
+\KOMAoptions{numbers = noenddot} % der Punkt hinter den Kapiteln etc wird entfernt: 1.1. wird zu 1.1
+
+
+% ============= Daten Plotten ============= 
+
+\usepackage{tikz} %Grafiken Zeichnen
+\if 0\tikzextern
+	\usetikzlibrary{shapes, arrows, positioning, calc, chains, scopes}
+\else
+	\usepackage{shellesc} % Notwendig für LuaLaTeX
+	\usetikzlibrary{shapes, arrows, positioning, calc, chains, scopes, external}
+	\tikzexternalize[prefix=00_ressources/tikz/,optimize command away=\includepdf] % activate and define tikz/ as cache folder
+\fi
+
+\usepackage{pgfplots}  %Kurven, Graphen
+\usepgfplotslibrary{dateplot, fillbetween, groupplots}
+\pgfkeys{/pgf/number format/.cd,fixed, use comma}
+\pgfplotsset{
+	compat=newest,
+	every axis label/.append style={font={\rmfamily}},
+}
+\AtBeginEnvironment{tikzpicture}{\footnotesize} %Schriftart Tabelle \small, \footnotesize
+
+\usepgfplotslibrary{groupplots}
+\usepgfplotslibrary{dateplot}
+
+\newlength{\figureheight} %Eigene Vatiable für Längen
+\newlength{\figurewidth} %Eigene Vatiable für Längen
+
+
+% ============= Testing ============= 
+
+\usepackage{blindtext}	% Beispiel Texte einfügen per \blindtext	

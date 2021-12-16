@@ -1,0 +1,118 @@
+\chapter{Programmierungen}\label{chap:programming}
+\section{{\TeX} if/ else}\label{sec:tex}
+Grundlegender Aufbau:\\
+\begin{lstlisting}[language=TeX]
+\if <token-1><token-2> <tex-code-1> [\else <tex-code-2>] \fi
+\end{lstlisting}
+Bsp1:\\
+\begin{lstlisting}[language=TeX]
+\ifx\mycmd\undefined
+	undefed
+\else
+	\if\mycmd1
+		defed, 1
+	\else
+		defed
+	\fi
+\fi
+\end{lstlisting}
+
+\ifx\mycmd\undefined
+	undefed
+\else
+	\if\mycmd1
+		defed, 1
+	\else
+		defed
+	\fi
+\fi
+\\Bsp2:\\
+\begin{lstlisting}[language=TeX]
+\def\mycmd{1}
+
+\ifx\mycmd\undefined
+	undefed
+\else
+	\if\mycmd1
+		defed, 1
+	\else
+		defed
+	\fi
+\fi
+	
+\end{lstlisting}
+
+\def\mycmd{1}
+
+\ifx\mycmd\undefined
+	undefed
+\else
+	\if\mycmd1
+		defed, 1
+	\else
+		defed
+	\fi
+\fi
+\\Bsp3:\\
+\begin{lstlisting}[language=TeX]
+\def\mycmd{0}
+
+\ifx\mycmd\undefined
+	undefed
+\else
+	\if\mycmd1
+		defed, 1
+	\else
+		defed
+	\fi
+\fi
+\end{lstlisting}
+
+
+\def\mycmd{0}
+
+\ifx\mycmd\undefined
+	undefed
+\else
+	\if\mycmd1
+		defed, 1
+	\else
+		defed
+	\fi
+\fi
+
+
+\section{forPGF}\label{sec:pgf}
+
+\section{Lua}\label{sec:lua}
+\begin{lstlisting}[language={[5.0]Lua}]
+\count75=1564 % Data existing in the "TeX World"
+\directlua{
+local x=\number\count75 \space % Transfer TeX data to the "Lua World"
+tex.print("x= "..x)
+local y = (2*x-65)/5
+tex.print(" and y = "..y)
+}
+\end{lstlisting}
+
+%\count75=1564 % Data existing in the "TeX World"
+%\directlua{
+%local x=\number\count75 \space % Transfer TeX data to the "Lua World"
+%tex.print("x= "..x)
+%local y = (2*x-65)/5
+%tex.print(" and y = "..y)
+%}
+
+Die Kreiszahl $\pi$ hat den Wert \directlua{tex.print(math.pi)}.
+
+\def\aa{tex}
+\def\bb{.}
+\def\cc{print}
+\def\dd{("Hello wie gehts")}
+\directlua{\aa\bb\cc\dd}
+
+\directlua{
+	tex.print(math.random())
+	tex.print(math.random())
+}
+

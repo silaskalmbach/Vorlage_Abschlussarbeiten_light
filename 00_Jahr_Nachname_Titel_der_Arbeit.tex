@@ -1,0 +1,100 @@
+%------------------------------------------------------------------------------
+%Description:  LaTeX Thesis Template main file
+%Author:       silas.kalmbach@ilek.uni-stuttgart.de
+%Created:      2021-03-10
+%------------------------------------------------------------------------------
+
+
+% ============= Einstellungen zur Arbeit =============
+
+\documentclass[a4paper,12pt, openright, 
+%twoside
+]{scrreprt}
+
+\def\tikzextern{0} % 0 = Nein; 1 = Ja (TikZ Grafiken extern Speichern)
+\def\mintedinstall{0} % 0 = Nein; 1 = Ja; Um Minted zu nutzen muss Python und Pygments installiert sein. Alternative: listings
+
+% Variablen einbinden
+\input{00_ressources/variables}
+
+% Preambel einbinden
+\input{00_ressources/preamble}
+
+
+% ============= Angaben zur Arbeit =============
+
+
+\hypersetup{ % Hinterlegte Daten in der PDF
+	pdftitle={\TitelDerArbeit},
+	pdfsubject={\TypDerArbeit},
+	pdfauthor={\StudentNachname, \StudentVorname},
+	pdfkeywords={}
+}
+
+% ============= Besondere Trennungen ============= 
+
+\hyphenation{De-zi-mal-tren-nung}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% ============= Dokumentbeginn =============
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\pagestyle{empty} %Seiten ohne Kopf- und Fußzeile sowie Seitenzahl
+\include{01_titel}
+\restoregeometry
+
+\pagestyle{plain.scrheadings} % Leere Kopf- und Fußzeilen
+\pagenumbering{Roman} % Römische Seitenzahlen verwenden
+\include{02_aufgabenstellung} %->Optional
+\include{03_erklaerung}
+\include{04_vorwort} %->Optional
+\include{05_zusammenfassung}
+\tableofcontents %Inhaltsverzeichnis
+\cleardoubleoddpage %Beginn auf einer neuen Seite. Bei Doppelseiten rechts
+\pagenumbering{arabic}	% Arabische Seitenzahlen verwenden
+\include{06_symbole}
+\cleardoubleoddpage %Beginn auf einer neuen Seite. Bei Doppelseiten rechts
+\pagestyle{scrheadings}	% pagestyle für gesamtes Dokument aktivieren (Kopf- und Fußzeilen)
+
+
+% ============= Kapitel =============
+% durch Eigene Kapitel erstezen
+
+\include{10_bsp} % Zitation
+\include{11_bsp} % Programmcode
+\include{12_bsp} % Tabellen
+\include{13_bsp} % Formeln
+\include{14_bsp} % Grafiken
+\include{15_bsp} % Anhang
+
+\ifluatex
+\include{16_bsp} % Programmierung
+\fi
+
+% ============= Anhang =============
+
+%\appendix
+%\begin{appendices}
+%	\include{15_bsp}
+%\end{appendices}
+
+
+% ============= Verzeichnise =============
+
+\printbibliography[title=Literaturverzeichnis] %Literaturverzeichnis
+\addcontentsline{toc}{chapter}{Literaturverzeichnis}
+
+\listoffigures %Verzeichnis aller Bilder
+\addcontentsline{toc}{chapter}{Abbildungsverzeichnis}
+
+\listoftables %Verzeichnis aller Tabellen
+\addcontentsline{toc}{chapter}{Tabellenverzeichnis}
+
+
+% ============= Dokumentende =============
+
+\end{document}
