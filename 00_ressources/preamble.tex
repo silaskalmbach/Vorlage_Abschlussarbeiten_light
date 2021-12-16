@@ -122,30 +122,44 @@
 % ============= Schriftarten =============
 
 \ifluatex
-%% ============= Lua-LaTeX =============
 
-	\usepackage[no-math]{fontspec} 
-	\setmainfont{UniversforUniS}[
-	Extension      = .ttf,
-	Path           = 00_ressources/fonts/,
-	UprightFont    = *55Rm-Regular,
-	ItalicFont     = *45LtObl-Rg,
-	BoldFont       = *65Bd-Regular,
-	BoldItalicFont = *45LtObl-Rg,
-	]
-	\setsansfont{UniversforUniS}[
-	Extension      = .ttf,
-	Path           = 00_ressources/fonts/,
-	UprightFont    = *55Rm-Regular,
-	ItalicFont     = *45LtObl-Rg,
-	BoldFont       = *65Bd-Regular,
-	BoldItalicFont = *45LtObl-Rg,
-	]
-	%\setmonofont{}[]
-	\addtokomafont{disposition}{\rmfamily} %Überschriften selbe Schriftart wie Text
-	\renewcommand\familydefault\sfdefault % Formeln in Sans-Serif
-	\usepackage[italic, symbolgreek]{mathastext} % Formeln in Sans-Serif
-	\renewcommand\familydefault\rmdefault % Formeln in Sans-Serif
+\openin15=00_ressources/fonts/UniversforUniS55Rm-Regular.ttf   % TeX primitive level % \IfFileExists{filename}{true-branch}{false-branch} %LaTeX -> geht auch 15 ist eine Variable/Beschreibung
+	\ifeof15           %... file does not exist
+	
+		\usepackage[no-math]{fontspec}
+		\setmainfont{Arial}
+		
+		\addtokomafont{disposition}{\rmfamily} %Überschriften selbe Schriftart wie Text
+		\renewcommand\familydefault\sfdefault % Formeln in Sans-Serif
+		\usepackage[italic, symbolgreek]{mathastext} % Formeln in Sans-Serif
+		\renewcommand\familydefault\rmdefault % Formeln in Sans-Serif
+		
+	\else\closein15    %... file exists
+	
+	%% ============= Lua-LaTeX =============
+		\usepackage[no-math]{fontspec} 
+		\setmainfont{UniversforUniS}[
+		Extension      = .ttf,
+		Path           = 00_ressources/fonts/,
+		UprightFont    = *55Rm-Regular,
+		ItalicFont     = *45LtObl-Rg,
+		BoldFont       = *65Bd-Regular,
+		BoldItalicFont = *45LtObl-Rg,
+		]
+		\setsansfont{UniversforUniS}[
+		Extension      = .ttf,
+		Path           = 00_ressources/fonts/,
+		UprightFont    = *55Rm-Regular,
+		ItalicFont     = *45LtObl-Rg,
+		BoldFont       = *65Bd-Regular,
+		BoldItalicFont = *45LtObl-Rg,
+		]
+		%\setmonofont{}[]
+		\addtokomafont{disposition}{\rmfamily} %Überschriften selbe Schriftart wie Text
+		\renewcommand\familydefault\sfdefault % Formeln in Sans-Serif
+		\usepackage[italic, symbolgreek]{mathastext} % Formeln in Sans-Serif
+		\renewcommand\familydefault\rmdefault % Formeln in Sans-Serif
+	\fi
 
 \else
 %% ============= PDF-LaTeX =============
@@ -202,7 +216,7 @@ sorting=none,									% Sortierung des Verzeichnis nach Autor, Titel, Jahr
 % sorting=none,									% Keine Sortierung des Verzeichnisses
 ]{biblatex}	
 
-\addbibresource{Literatur.bib} %Bibliographiedateien laden
+\addbibresource{literatur.bib} %Bibliographiedateien laden
 
 \urlstyle{same}	% url Schriftart anpassen auf die des Dokuments anpassen
 \usepackage{xpatch}% author in bold font in bibliography
