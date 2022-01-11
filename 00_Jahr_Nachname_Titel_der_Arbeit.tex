@@ -7,9 +7,18 @@
 
 % ============= Einstellungen zur Arbeit =============
 
-\documentclass[a4paper,12pt, openright, 
-%twoside
-]{scrreprt}
+\documentclass[%
+paper=a4,
+bibliography=totoc,	% Literaturverzeichnis im Inhalt
+listof=totoc,		% Abb.- und Tab.verzeichnis im Inhalt
+listof=entryprefix, % Abkürzungen Abb./Tab. in den Verzeichnissen
+fontsize=11pt, 		% Schriftgröße
+twoside=off, 		% Off = PDF-Version, On = Booklet / Book (Gedrucktes Exemplar)
+headings=openright	% Einfügen von Leerseiten
+]{scrbook}          % Dokumentenklasse: KOMA-Script Book
+
+
+% ============= Einstellungen zum Kompilieren =============
 
 \def\tikzextern{0} % 0 = Nein; 1 = Ja (TikZ Grafiken extern Speichern)
 \def\mintedinstall{0} % 0 = Nein; 1 = Ja; Um Minted zu nutzen muss Python und Pygments installiert sein. Alternative: listings
