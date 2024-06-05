@@ -117,17 +117,22 @@
 % ============= Standart Einstellungen der Pfade =============
 
 \graphicspath{{./01_images/}{./01_images/Titelseite/}} %Bilderordner
-
+\def\unifontspath{./00_ressources/fonts/}
+\def\unifontfilename{UniversforUniS55Rm-Regular.ttf}
+\def\unifullfontpath{\unifontspath\unifontfilename}
 
 % ============= Schriftarten =============
 
 \ifluatex
-
-\openin15=00_ressources/fonts/UniversforUniS55Rm-Regular.ttf   % TeX primitive level % \IfFileExists{filename}{true-branch}{false-branch} %LaTeX -> geht auch 15 ist eine Variable/Beschreibung
-	\ifeof15           %... file does not exist
+	\wlog{SK: LuaLaTeX existiert}
 	
+	\openin15={\unifullfontpath}   % TeX primitive level % \IfFileExists{filename}{true-branch}{false-branch} %LaTeX -> geht auch 15 ist eine Variable/Beschreibung
+	\ifeof15           %... file does not exist
+		\wlog{SK: ttf file \unifullfontpath does not exist}
+		
 		\usepackage[no-math]{fontspec}
-		\setmainfont{Arial}
+		%\setmainfont{Arial}
+		\setmainfont{QTCasual}
 		
 		\addtokomafont{disposition}{\rmfamily} %Überschriften selbe Schriftart wie Text
 		\renewcommand\familydefault\sfdefault % Formeln in Sans-Serif
@@ -135,12 +140,13 @@
 		\renewcommand\familydefault\rmdefault % Formeln in Sans-Serif
 		
 	\else\closein15    %... file exists
-	
-	%% ============= Lua-LaTeX =============
+		\wlog{SK: ttf file exist}
+		
+		%% ============= Lua-LaTeX =============
 		\usepackage[no-math]{fontspec} 
 		\setmainfont{UniversforUniS}[
 		Extension      = .ttf,
-		Path           = 00_ressources/fonts/,
+		Path           = {\unifontspath},
 		UprightFont    = *55Rm-Regular,
 		ItalicFont     = *45LtObl-Rg,
 		BoldFont       = *65Bd-Regular,
@@ -148,7 +154,7 @@
 		]
 		\setsansfont{UniversforUniS}[
 		Extension      = .ttf,
-		Path           = 00_ressources/fonts/,
+		Path           = {\unifontspath},
 		UprightFont    = *55Rm-Regular,
 		ItalicFont     = *45LtObl-Rg,
 		BoldFont       = *65Bd-Regular,
@@ -162,14 +168,14 @@
 	\fi
 
 \else
-%% ============= PDF-LaTeX =============
+	\wlog{SK: verwende PDF-LaTeX}
+	%% ============= PDF-LaTeX =============
 	\usepackage[T1]{fontenc} %Richtige Trennung von Umlauten
 	\usepackage[scale=1]{tgheros}
-%	\usepackage{fourier}
+	%	\usepackage{fourier}
 	\renewcommand\familydefault\sfdefault % alles in Sans-Serif
 	\usepackage[italic, symbolgreek]{mathastext} % Formeln in Sans-Serif
 \fi
-
 
 
 \usepackage{setspace} %Zeilenabstand
@@ -266,3 +272,5 @@ labelfont=bf]{caption} %Label in Bold
 % ============= Testing ============= 
 
 \usepackage{blindtext}	% Beispiel Texte einfügen per \blindtext	
+
+\wlog{SK: Initialisierung beendet}
