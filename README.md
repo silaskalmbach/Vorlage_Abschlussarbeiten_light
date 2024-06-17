@@ -84,5 +84,5 @@ Durch Tikz Kompilierte Grafiken. Keine Anpassungen notwendig.
 Die verwendeten Abbildungen können in diesem Ordner abgelegt werden. Auch der Aufbau dieses Ordner kann beliebig angepasst werden.
 Verwenden Sie keine Umlaute oder Sonderzeichen bei der Benennung der Bilddateien.
 
-## Umfang - Seitananzahl
+## Umfang - Seitenanzahl
 Der Umfang der Arbeit sollte ohne Anhang zwischen 60 und 100 Seiten liegen. Unter- oder Überschreitungen sind mit dem Betreuer abzustimmen.
